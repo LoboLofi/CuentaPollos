@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Cuenta pollos</title>
+    </head>
+    <body>
+        <div class="Pollos"></div>
+        <div class="app">
+            <marquee><img src="img/pollo.jpg" /></marquee>
+            <div id="deviceready" class="blink">
+                <p class="event listening">CUENTA POLLOS 2 by Marqueeto</p>
+                <p class="event listening" id="scoreBoard">Pollos: </p>
+            </div>
+        </div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+            var direction  = 'right';
+            var hMargin   = 0;
+            var vMargin   = 0;
+            var nPollos   = 0;
+            var marquee_R = 
+					'<marquee direction="right" ';
+            var marquee_L = 
+					'<marquee direction="left"  ';
+            var marquee_U = 
+					'<marquee direction="up"    ';
+            var marquee_D = 
+					'<marquee direction="down"  ';
+            var marquee_2part=
+               ' onclick="destroidPollo(this)" ><img src="img/pollo.jpg" /></marquee>';
+            
+            $( document ).ready(function(){
+//               $( document ).bind('keydown', function( e ) {
+//                  getNewDirection( e.keyCode );
+//               });
+               startGame();
+            });
+            
+            function startGame() {
+               ticker = setInterval( getNewDirection, 200 );
+            }
+            
+            function getNewDirection(  ) {
+               var codes = {
+                  37 : 'left',
+                  38 : 'up',
+                  39 : 'right',
+                  40 : 'down'
+               };
+               var marquee1part = ' ';
+               var num1 = (parseInt( (169 * Math.random()) )%4)+37;
+               hMargin  = parseInt(screen.width * Math.random());
+               vMargin  = parseInt(screen.height * Math.random()) - 40;
+               var newDirection = codes[ num1 ];
+               
+               switch( newDirection ) {
+                  case 'up' :
+                        marquee1part = marquee_U + ' style= "margin:' + vMargin + 'px ' + hMargin + 'px" ';
+                     break;
+                  case 'down' :
+                        marquee1part =  marquee_D + ' style= "margin:' + vMargin + 'px ' + hMargin + 'px" ';
+                     break;
+                  case 'right' :
+                        marquee1part =  marquee_R + ' style= "margin:' + vMargin + 'px ' + hMargin + 'px" ';
+                     break;
+                  case 'left' :
+                        marquee1part =  marquee_L + ' style= "margin:' + vMargin + 'px ' + hMargin + 'px" ';
+                     break;
+               }
+               nPollos++;
+               $( '#scoreBoard' ).html( 'Pollos: ' + nPollos );
+               $( 'div.Pollos' ).append( marquee1part + 'px" class="Pollo' + nPollos + '" ' + marquee_2part );
+               direction = newDirection ;
+            }
+            function destroidPollo(sender){
+               $( "marquee" ).remove( "." + sender.className );
+               nPollos--;
+               $( '#scoreBoard' ).html( 'Pollos: ' + nPollos );
+            }
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
