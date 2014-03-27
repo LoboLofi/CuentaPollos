@@ -9,11 +9,11 @@
         <title>Cuenta pollos</title>
     </head>
     <body>
-        <div class="Pollos"></div>
+        <div class="Pollos">Pollos Everyone</div>
         <div class="app">
             <marquee><img src="img/pollo.jpg" /></marquee>
             <div id="deviceready" class="blink">
-                <p class="event listening">CUENTA POLLOS 2 by Marqueeto</p>
+                <p class="event listening">CUENTA POLLOS 2 by Marqueeto. A New game for new age.</p>
                 <p class="event listening" id="scoreBoard">Pollos: </p>
             </div>
         </div>
@@ -38,9 +38,6 @@
                ' onclick="destroidPollo(this)" ><img src="img/pollo.jpg" /></marquee>';
             
             $( document ).ready(function(){
-//               $( document ).bind('keydown', function( e ) {
-//                  getNewDirection( e.keyCode );
-//               });
                startGame();
             });
             
@@ -81,8 +78,15 @@
                direction = newDirection ;
             }
             function destroidPollo(sender){
-               $( "marquee" ).remove( "." + sender.className );
+               $( sender.className ).animate({
+                  width: "70%",
+                  opacity: 0.4,
+                  marginLeft: "0.6in",
+                  fontSize: "3em",
+                  borderWidth: "10px"
+                  }, 5500 );
                nPollos--;
+               $( "marquee" ).remove( "." + sender.className );
                $( '#scoreBoard' ).html( 'Pollos: ' + nPollos );
             }
         </script>
